@@ -1,0 +1,5 @@
++ Since the android market is active and millions of android users are using it, it has become necessary for every developer to develop an app for this platform so as to reach out to a large number of masses.
+
++ The application has been developed on the basis of java programming language and designed according to user needs.
+
++ A lot of people struggle with speaking in public. The most common mistakes they make are mumbling, not looking at their audience, and forgetting to breathe. This application will teach you how to improve your public speaking skills 
