@@ -24,10 +24,17 @@
     <string name="lbl_contactNo">Contact Number</string>
     <string name="register_btn">Register</string>
 
+    <!-- Dashboard -->
+    <string name="dashboard">Dashboard</string>
+    <string name="speech">Analyze Speech</string>
+    <string name="profile">View\nProfile</string>
+    <string name="v_reports">View\nReports</string>
+    <string name="stories">Top\nStories</string>
+    <string name="tips">Useful\nTips</string>
+
+
     <!-- Error handling -->
     <string name="error_fname">First name required</string>
-
-
 
 
 </resources>
