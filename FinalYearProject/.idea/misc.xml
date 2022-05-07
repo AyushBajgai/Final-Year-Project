@@ -5,9 +5,14 @@
       <map>
         <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/drawable/button.xml" value="0.2235" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/drawable/ic_person.xml" value="0.186" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_analyze_speech.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_dashboard.xml" value="0.17760416666666667" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_top_stories.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_useful_tips.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_view_profile.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/FinalYearProject/app/src/main/res/layout/activity_view_report.xml" value="0.21331521739130435" />
       </map>
     </option>
   </component>
