@@ -14,7 +14,8 @@
     <color name="whiteTextColor">#fff</color>
     <color name="primaryTextColor">#2661FA</color>
     <color name="loginBkColor">#f0f0f0</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#4169e1</color>
 
-    <!--colros for card-->
+    <!--coloros for card-->
     <color name="whiteCardColor">#fff</color>
 </resources>

@@ -44,8 +44,12 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="@color/royalBlue"
+        app:startIconTint="@color/royalBlue"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/royalBlue"
         app:layout_constraintTop_toBottomOf="@+id/layout_username"
         app:passwordToggleEnabled="true"
         tools:ignore="MissingConstraints">
@@ -67,7 +71,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        app:boxStrokeColor="@color/royalBlue"
         android:layout_marginEnd="16dp"
+        app:startIconDrawable="@drawable/ic_person"
+        app:startIconTint="@color/royalBlue"
+        android:textColorHint="@color/royalBlue"
         android:hint="@string/lbl_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -80,7 +88,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/royalBlue"
-            android:textColorHint="@color/royalBlue"
             tools:layout_editor_absoluteY="11dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -123,7 +130,7 @@
         android:textAllCaps="false"
         android:textColor="@color/royalBlue"
         android:textSize="18sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.749"
