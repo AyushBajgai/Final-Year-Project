@@ -26,7 +26,7 @@
 
     <!-- Dashboard -->
     <string name="dashboard">Dashboard</string>
-    <string name="speech">Analyze Speech</string>
+    <string name="speech">Analyze\nSpeech</string>
     <string name="profile">View\nProfile</string>
     <string name="v_reports">View\nReports</string>
     <string name="stories">Top\nStories</string>
@@ -35,6 +35,8 @@
 
     <!-- Error handling -->
     <string name="error_fname">First name required</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

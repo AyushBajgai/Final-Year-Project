@@ -66,7 +66,8 @@ EditText edittext;
             return false;
         }
         else{
-            binding.layoutPassword.isErrorEnabled();
+            binding.layoutPassword.setError(null);
+            binding.layoutPassword.setErrorEnabled(false);
         }
 
         return true;

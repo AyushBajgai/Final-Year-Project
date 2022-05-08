@@ -6,12 +6,15 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.finalyearproject.databinding.ActivityDashboardBinding;
 import com.example.finalyearproject.databinding.ActivityRegisterBinding;
-import com.example.finalyearproject.databinding.ActivityViewReportBinding;
 
 public class dashboard extends AppCompatActivity {
+
+    //Initiating string dasboard title to be change
+    private TextView dashboardTitleChange;
 
     private ActivityDashboardBinding dashboardBinding;
 
@@ -22,51 +25,17 @@ public class dashboard extends AppCompatActivity {
         View view =dashboardBinding.getRoot();
         setContentView(view);
 
-        //For Viewing Profile
-        dashboardBinding.cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(dashboard.this,view_profile.class);
-                startActivity(i);
-            }
-        });
+        //Getting dashboard title by ID
+        dashboardTitleChange = findViewById(R.id.title_dashboard);
 
-        //For Top Stories
-        dashboardBinding.cardView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(dashboard.this,top_stories.class);
-                startActivity(i);
-            }
-        });
+        if(savedInstanceState == null){
+            //Loading dashboard items fragment
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view,new dashboardFragment()).commit();
+        }
 
-        //For Viewing Reports
-        dashboardBinding.cardView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(dashboard.this,view_report.class);
-                startActivity(i);
-            }
-        });
+    }
 
-        //For Useful Tips
-        dashboardBinding.cardView4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(dashboard.this,useful_tips.class);
-                startActivity(i);
-            }
-        });
-
-        //For Analyzing Speech
-        dashboardBinding.cardView5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(dashboard.this,analyze_speech.class);
-                startActivity(i);
-            }
-        });
-
-
+    public void changeTitle(String getTitle){
+        dashboardTitleChange.setText(getTitle);
     }
 }

@@ -10,21 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
-            android:name=".analyze_speech"
-            android:exported="false" />
-        <activity
-            android:name=".useful_tips"
-            android:exported="false" />
-        <activity
-            android:name=".view_report"
-            android:exported="false" />
-        <activity
-            android:name=".top_stories"
-            android:exported="false" />
-        <activity
-            android:name=".view_profile"
-            android:exported="false" />
-        <activity
             android:name=".dashboard"
             android:exported="true">
             <intent-filter>
@@ -32,13 +17,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
         <activity
             android:name=".register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false">
+
+
+        </activity>
     </application>
 
 </manifest>
