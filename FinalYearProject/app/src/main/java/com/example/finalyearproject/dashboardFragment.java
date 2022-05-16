@@ -48,6 +48,17 @@ public class dashboardFragment extends Fragment {
             }
         });
 
+        //While Clicking on viewReports load top view report fragment
+        binding.cardReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_view, new view_report()).addToBackStack(null).commit();
+            }
+        });
+
+
+
+
 
         return binding.getRoot();
     }

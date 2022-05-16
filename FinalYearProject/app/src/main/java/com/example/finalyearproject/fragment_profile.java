@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class view_report extends Fragment {
+
+public class fragment_profile extends Fragment {
 
     private View rootView;
 
@@ -16,10 +17,10 @@ public class view_report extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_view_report, container, false);
+        rootView= inflater.inflate(R.layout.fragment_profile, container, false);
 
         //Setting the title
-        ((dashboard)getActivity()).changeTitle("Your Report Status");
+        ((dashboard)getActivity()).changeTitle("Your Profile");
 
         return rootView;
     }

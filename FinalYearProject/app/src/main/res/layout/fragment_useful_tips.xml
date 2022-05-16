@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/title_dashboard"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="5dp"
             android:columnCount="1"
             android:rowCount="8">
 
