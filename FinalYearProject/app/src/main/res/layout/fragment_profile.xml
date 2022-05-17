@@ -5,10 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".fragment_profile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is profile" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_below="@id/relativeLayout"
+            android:text="This is Profile"
+            tools:ignore="NotSibling" />
+    </RelativeLayout>
+
 
 </FrameLayout>

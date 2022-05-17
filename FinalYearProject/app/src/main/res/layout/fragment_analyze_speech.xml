@@ -5,11 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".analyzeSpeechFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:text="This is Analyze Speech Fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_below="@id/relativeLayout"
+            android:text="This is Analyze Speech Fragment"
+            tools:ignore="NotSibling" />
+    </RelativeLayout>
+
+    <!-- TODO: Update blank fragment layout -->
+
 
 </FrameLayout>

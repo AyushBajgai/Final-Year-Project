@@ -5,14 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".topStoriesFragment">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Top Stories" />
+            android:gravity="center"
+            android:text="This is Top stories"/>
     </FrameLayout>
 
 </ScrollView>

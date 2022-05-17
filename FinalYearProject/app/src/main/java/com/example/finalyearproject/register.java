@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
@@ -111,6 +113,21 @@ public class register extends AppCompatActivity {
             binding.username.requestFocus();
             return false;
         }
+
+        mAuth.fetchSignInMethodsForEmail(username)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+                        if (!isNewUser) {
+                            binding.layoutUsername.setError("Email is already taken");
+                            binding.username.requestFocus();
+
+                        }
+
+                    }
+                });
+
 
         //Password Validation
         if(password.isEmpty()){
@@ -219,7 +236,6 @@ public class register extends AppCompatActivity {
             return false;
         }
 
-
         else{
             binding.layoutFname.setErrorEnabled(false);
             binding.layoutFname.setError(null);
@@ -247,11 +263,15 @@ public class register extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(register.this,MainActivity.class);
+                        //clearing the previous tasks if present!
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         // Registration failed
-                        Toast.makeText(getApplicationContext(),"Registration failed!!" + " Please try again later",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Registration Failed" + " \nPlease try again",Toast.LENGTH_LONG).show();
                     }
                 }
             });

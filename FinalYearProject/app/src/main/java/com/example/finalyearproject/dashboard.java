@@ -56,10 +56,10 @@ public class dashboard extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-                    case R.id.btn_exit:
+/*                    case R.id.btn_exit:
                         moveTaskToBack(true);
                         System.exit(0);
-                        return true;
+                        return true;*/
                 }
                 return false;
             }
