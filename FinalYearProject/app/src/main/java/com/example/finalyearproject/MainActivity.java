@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.finalyearproject.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
 private ActivityMainBinding binding;
+
+private FirebaseAuth mAuth;
 
 EditText edittext;
 
@@ -21,6 +24,9 @@ EditText edittext;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         binding.btnRegisterHere.setOnClickListener(new View.OnClickListener() {
             @Override
