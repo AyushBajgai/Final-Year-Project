@@ -10,14 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <EditText
+            android:id="@+id/record_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Tap to Speak"
             android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_below="@id/relativeLayout"
-            android:text="This is Analyze Speech Fragment"
-            tools:ignore="NotSibling" />
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
+
+        <ImageView
+            android:id="@+id/recorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_mic" />
     </RelativeLayout>
 
     <!-- TODO: Update blank fragment layout -->
