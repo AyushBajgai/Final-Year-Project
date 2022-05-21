@@ -28,7 +28,7 @@ public class dashboardFragment extends Fragment {
         binding.cardAnalyze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getParentFragmentManager().beginTransaction().replace(R.id.fragment_view,new analyzeSpeechFragment()).addToBackStack(null).commit();
+             getParentFragmentManager().beginTransaction().replace(R.id.fragment_view,new analyzeSpeechFragment()).addToBackStack(null).commit();
             }
         });
 

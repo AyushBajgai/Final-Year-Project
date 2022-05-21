@@ -3,6 +3,7 @@ package com.example.finalyearproject;
 import static android.content.ContentValues.TAG;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class analyzeSpeechFragment extends AppCompatActivity {
+public class analyzeSpeechFragment extends Fragment {
 
     private View rootView;
     private static final String TAG = "VoiceRecognition";
@@ -61,25 +62,21 @@ public class analyzeSpeechFragment extends AppCompatActivity {
 private FragmentAnalyzeSpeechBinding dashboardBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        dashboardBinding = FragmentAnalyzeSpeechBinding.inflate(getLayoutInflater());
-        View view =dashboardBinding.getRoot();
-        rootView=view;
-        setContentView(view);
-    // Inflate the layout for this fragment
-//        rootView = inflater.inflate(R.layout.fragment_analyze_speech, container, false);
-//        ((dashboard)getActivity()).changeTitle("Analyze Speech");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        rootView =  inflater.inflate(R.layout.fragment_analyze_speech, container, false);
+
+         ((dashboard)getActivity()).changeTitle("Analyze Speech");
 
         //Getting an ID
         recordedText = (EditText) rootView.findViewById(R.id.record_text);
         mic = (ImageView) rootView.findViewById(R.id.recorder);
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
 
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(analyzeSpeechFragment.this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
                     checkPermission();
 //                    checkSpeech();
                 }
@@ -89,7 +86,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
             }
         });
 
-//        return rootView;
+        return rootView;
     }
 
     @Override
@@ -155,7 +152,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
         };
 
         speechRecognizer.setRecognitionListener(recognitionListener);
-        if (speechRecognizer.isRecognitionAvailable(analyzeSpeechFragment.this))
+        if (speechRecognizer.isRecognitionAvailable(getActivity()))
         {
             Log.d("SpeechListening","started listening hopefully");
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -176,7 +173,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
         switch (requestCode){
             case VOICE_RECOGNITION_REQUEST_CODE:{
-                if(resultCode == RESULT_OK && null !=data){
+                if(resultCode == Activity.RESULT_OK && null !=data){
                     ArrayList<String> result =data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     recordedText.setText(result.get(0));
                 }
@@ -190,7 +187,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
         if(requestCode == RecordAudioRequestCode && grantResults.length>0){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Permission Granted", Toast.LENGTH_SHORT).show();
                 checkSpeech();
             }
         }
@@ -198,7 +195,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
     private void checkPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
         }
     }
 }
