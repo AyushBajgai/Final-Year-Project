@@ -32,11 +32,28 @@
     <string name="stories">Top\nStories</string>
     <string name="tips">Useful\nTips</string>
 
+    <!-- Profile -->
+    <string name="lbl_full_name">Name</string>
+    <string name="db_full_name">Your name goes here</string>
+    <string name="db_email">Your email goes here</string>
+    <string name="db_address">Your address goes here</string>
+    <string name="db_contact_no">Your contact goes here</string>
+    <string name="change_password">Change Password</string>
+
+
+    <!-- Reset Password -->
+    <string name="reset">Reset Password</string>
+    <string name="valid">Enter your email address</string>
+
+
     <!-- Button Navigation -->
     <string name="home">Home</string>
     <string name="exit">Exit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Api Key -->
+    <string name="api_key">aac4fb9367c34dbf97bf94cbb16963b9</string>
 
 
 </resources>

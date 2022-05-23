@@ -4,8 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -13,13 +12,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.os.PersistableBundle;
-import android.provider.Settings;
+
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -28,10 +26,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+
 import android.widget.Toast;
 
-import com.example.finalyearproject.databinding.ActivityDashboardBinding;
 import com.example.finalyearproject.databinding.FragmentAnalyzeSpeechBinding;
 
 import java.util.ArrayList;
@@ -52,7 +50,7 @@ public class analyzeSpeechFragment extends Fragment {
     SpeechRecognizer speechRecognizer;
 
     EditText recordedText;
-    ImageView mic;
+    ImageButton mic;
 
     public static final Integer RecordAudioRequestCode = 1;
 
@@ -70,7 +68,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
         //Getting an ID
         recordedText = (EditText) rootView.findViewById(R.id.record_text);
-        mic = (ImageView) rootView.findViewById(R.id.recorder);
+        mic = (ImageButton) rootView.findViewById(R.id.recorder);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
 
         mic.setOnClickListener(new View.OnClickListener() {

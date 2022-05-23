@@ -1,12 +1,16 @@
 package com.example.finalyearproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -45,6 +49,25 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
+        //While clicking on exit icon shows message
+        dashboardBinding.imageExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(dashboard.this);
+
+                builder.setMessage("Are you sure want to logout").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(dashboard.this, MainActivity.class));
+                        finish();
+                    }
+                }).setNegativeButton("No", null);
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
         //Button Navigation
         dashboardBinding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -77,5 +100,13 @@ public class dashboard extends AppCompatActivity {
 
     public void changeTitle(String getTitle){
         dashboardTitleChange.setText(getTitle);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu,menu);
+
+        return true;
     }
 }

@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
 import java.util.regex.Pattern;
 
 public class register extends AppCompatActivity {
@@ -71,6 +72,7 @@ public class register extends AppCompatActivity {
         String lname = binding.lname.getText().toString().trim();
         String username = binding.username.getText().toString().trim();
         String password = binding.password.getText().toString().trim();
+        String newPassword =  sha256(password).toString();
         String cpassword = binding.cpassword.getText().toString().trim();
         String phone = binding.contactNo.getText().toString().trim();
         String address = binding.address.getText().toString().trim();
@@ -263,11 +265,24 @@ public class register extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Intent intent = new Intent(register.this,MainActivity.class);
-                        //clearing the previous tasks if present!
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                        User user = new User(fname, lname, username, newPassword, phone, address);
+
+                        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Intent intent = new Intent(register.this,MainActivity.class);
+                                    //clearing the previous tasks if present!
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    // Registration failed
+                                    Toast.makeText(getApplicationContext(),"Registration Failed" + " \nPlease try again",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
                     }
                     else {
                         // Registration failed
@@ -279,6 +294,24 @@ public class register extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
 
 }

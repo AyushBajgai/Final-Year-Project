@@ -43,6 +43,14 @@ EditText edittext;
             }
         });
 
+        binding.forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, forgetPassword.class);
+                startActivity(i);
+            }
+        });
+
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

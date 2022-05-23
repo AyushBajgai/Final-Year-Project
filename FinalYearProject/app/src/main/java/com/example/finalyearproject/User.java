@@ -6,16 +6,16 @@ public class User {
     String lastName;
     String email;
     String Password;
-    String Cpassword;
     String contactNo;
     String address;
 
-    public User(String firstName, String lastName, String email, String password, String cpassword, String contactNo, String address) {
+    private User(){}
+
+    public User(String firstName, String lastName, String email, String password, String contactNo, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         Password = password;
-        Cpassword = cpassword;
         this.contactNo = contactNo;
         this.address = address;
     }
@@ -53,14 +53,6 @@ public class User {
         Password = password;
     }
 
-    public String getCpassword() {
-        return Cpassword;
-    }
-
-    public void setCpassword(String cpassword) {
-        Cpassword = cpassword;
-    }
-
     public String getContactNo() {
         return contactNo;
     }
@@ -76,6 +68,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
 }

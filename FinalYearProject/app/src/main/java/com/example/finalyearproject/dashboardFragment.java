@@ -56,10 +56,6 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-
-
-
-
         return binding.getRoot();
     }
 }
