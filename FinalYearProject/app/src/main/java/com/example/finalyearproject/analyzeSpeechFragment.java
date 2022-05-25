@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -32,16 +33,26 @@ import android.widget.Toast;
 
 import com.example.finalyearproject.databinding.FragmentAnalyzeSpeechBinding;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class analyzeSpeechFragment extends Fragment {
 
+    private OkHttpClient client;
+    private String BASE_URL = "";
+
     private View rootView;
     private static final String TAG = "VoiceRecognition";
-
-
 
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
@@ -51,12 +62,10 @@ public class analyzeSpeechFragment extends Fragment {
 
     EditText recordedText;
     ImageButton mic;
+    Button check_grammar;
 
     public static final Integer RecordAudioRequestCode = 1;
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
 private FragmentAnalyzeSpeechBinding dashboardBinding;
 
     @Override
@@ -69,6 +78,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
         //Getting an ID
         recordedText = (EditText) rootView.findViewById(R.id.record_text);
         mic = (ImageButton) rootView.findViewById(R.id.recorder);
+        check_grammar = (Button) rootView.findViewById(R.id.grammar_check);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
 
         mic.setOnClickListener(new View.OnClickListener() {
@@ -79,10 +89,36 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 //                    checkSpeech();
                 }
                 checkSpeech();
-
-
             }
         });
+
+        check_grammar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String recordText = recordedText.getText().toString();
+                //Getting request
+                Log.d("text", "onClick: "+recordText);
+                client = new OkHttpClient();
+                //   RequestBody body2 = new FormBody.Builder().add("check","recordedText").add("language","en-US").build();
+                RequestBody body = new FormBody.Builder().add("check",recordText).add("language","en-US").build();
+
+                Request request = new Request.Builder()
+                        .url("https://grammarbot.p.rapidapi.com/check")
+                        .post(body)
+                        .addHeader("content-type", "application/x-www-form-urlencoded")
+                        .addHeader("X-RapidAPI-Host", "grammarbot.p.rapidapi.com")
+                        .addHeader("X-RapidAPI-Key", "08f0c5d657mshcd07a10b9a6e829p16bdbajsnc8abf85306ce")
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
 
         return rootView;
     }

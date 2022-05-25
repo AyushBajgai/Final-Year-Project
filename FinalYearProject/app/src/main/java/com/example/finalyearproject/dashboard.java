@@ -19,6 +19,7 @@ import com.example.finalyearproject.databinding.ActivityDashboardBinding;
 import com.example.finalyearproject.databinding.ActivityRegisterBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class dashboard extends AppCompatActivity {
 
@@ -59,7 +60,8 @@ public class dashboard extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(dashboard.this, MainActivity.class));
-                        finish();
+                        FirebaseAuth.getInstance().signOut();
+                       // finish();
                     }
                 }).setNegativeButton("No", null);
 

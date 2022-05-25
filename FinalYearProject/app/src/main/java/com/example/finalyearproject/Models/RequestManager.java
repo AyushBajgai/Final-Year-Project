@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 public class RequestManager {
 
     Context context;
-    //API key is
+    //API key
     String api = "aac4fb9367c34dbf97bf94cbb16963b9";
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl("https://newsapi.org/v2/").addConverterFactory(GsonConverterFactory.create()).build();

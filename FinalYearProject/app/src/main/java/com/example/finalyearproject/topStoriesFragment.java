@@ -35,12 +35,10 @@ public class topStoriesFragment extends Fragment {
         rootView2 = inflater.inflate(R.layout.fragment_top_stories, container, false);
 
         ((dashboard)getActivity()).changeTitle("Top Stories");
+
+        RequestManager requestManager = new RequestManager();
+        requestManager.getNewsHeadlines(listener, "general", null);
         return rootView2;
-
-    /*    RequestManager requestManager = new RequestManager(getActivity());*/
-       // RequestManager requestManager = new RequestManager();
-      //  requestManager.getNewsHeadlines(listener, "general", null);
-
     }
     private final OnFetchDataListener<NewsApiResponse> listener= new OnFetchDataListener<NewsApiResponse>() {
         @Override
