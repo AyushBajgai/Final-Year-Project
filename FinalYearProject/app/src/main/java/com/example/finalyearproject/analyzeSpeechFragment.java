@@ -7,6 +7,7 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -18,9 +19,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 
+import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,21 +32,46 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalyearproject.Models.Description;
+import com.example.finalyearproject.Models.Error;
+import com.example.finalyearproject.Models.NewsApiResponse;
+import com.example.finalyearproject.Models.RequestManager;
+import com.example.finalyearproject.Models.ResponseGrammar;
 import com.example.finalyearproject.databinding.FragmentAnalyzeSpeechBinding;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 public class analyzeSpeechFragment extends Fragment {
@@ -51,7 +79,15 @@ public class analyzeSpeechFragment extends Fragment {
     private OkHttpClient client;
     private String BASE_URL = "";
 
+    //Listing errors
+    ArrayList errors = new ArrayList<>();
+
+    public ArrayList<Error> errorArrayList = new ArrayList<>();
+
+    int startIndex, endIndex;
+
     private View rootView;
+    String dirpath;
     private static final String TAG = "VoiceRecognition";
 
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
@@ -62,6 +98,7 @@ public class analyzeSpeechFragment extends Fragment {
 
     EditText recordedText;
     ImageButton mic;
+    TextView description, suggestion;
     Button check_grammar;
 
     public static final Integer RecordAudioRequestCode = 1;
@@ -75,11 +112,32 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
          ((dashboard)getActivity()).changeTitle("Analyze Speech");
 
+         String Test = "Hello this is an example";
+                String subString = Test.substring(6,10);
+              //  String subString2 = Test.substring(11,15);
+
+      //  Log.d("text", "onClick: "+subString+subString2);
+
         //Getting an ID
         recordedText = (EditText) rootView.findViewById(R.id.record_text);
         mic = (ImageButton) rootView.findViewById(R.id.recorder);
         check_grammar = (Button) rootView.findViewById(R.id.grammar_check);
+        description = (TextView) rootView.findViewById(R.id.grammar_description);
+        suggestion = (TextView) rootView.findViewById(R.id.grammar_suggestion);
+        Button savePdf = (Button) rootView.findViewById(R.id.savePdf);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
+
+        savePdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutToImage(rootView);
+                try {
+                    imageToPDF();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,12 +155,40 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
             public void onClick(View v) {
                 String recordText = recordedText.getText().toString();
                 //Getting request
-                Log.d("text", "onClick: "+recordText);
                 client = new OkHttpClient();
                 //   RequestBody body2 = new FormBody.Builder().add("check","recordedText").add("language","en-US").build();
-                RequestBody body = new FormBody.Builder().add("check",recordText).add("language","en-US").build();
+//                RequestBody body = new FormBody.Builder().add("check",recordText).add("language","en-US").build();
+             //   String substring = recordText.substring(startIndex);
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.textgears.com/grammar/")
+                        .addConverterFactory(GsonConverterFactory.create()).build();
+               GrammarApi api= retrofit.create(GrammarApi.class);
+                Call<ResponseGrammar> call = api.call(recordText,"en-GB","zJbdUnwOejNPn9Sb");
+                call.enqueue(new Callback<ResponseGrammar>() {
+                    @Override
+                    public void onResponse(Call<ResponseGrammar> call, Response<ResponseGrammar> response) {
+                        Log.d(TAG, "onResponse: test");
+                        ResponseGrammar responseGrammar = response.body();
 
-                Request request = new Request.Builder()
+                        if (responseGrammar != null) {
+                            errorArrayList.add((Error) responseGrammar.getResponse().getErrors().get(0));
+                            if (errorArrayList != null) {
+                                for (int i=0; i<errorArrayList.size(); i++){
+                                    description.setText(errorArrayList.get(i).getDescription().getDescription());
+                                    String better = TextUtils.join("\n", errorArrayList.get(i).getBetter());
+                                    suggestion.setText("Possible Suggestions:\n" + better);
+                                    Log.d("response2", "onResponse: "+errorArrayList.get(i).getDescription());
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseGrammar> call, Throwable t) {
+                        Log.d("response", "onFailure: "+t.getMessage());
+                    }
+                });
+
+              /*  Request request = new Request.Builder()
                         .url("https://grammarbot.p.rapidapi.com/check")
                         .post(body)
                         .addHeader("content-type", "application/x-www-form-urlencoded")
@@ -113,7 +199,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
                     Response response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
 
@@ -122,7 +208,22 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
 
         return rootView;
     }
-
+    //Calling the API via queries
+    public interface GrammarApi{
+/*        @Headers({
+                "content-type: application/json;charset=UTF-8",
+              //  "content-type: application/x-www-form-urlencoded",
+                "X-RapidAPI-Host: grammarbot.p.rapidapi.com",
+                "X-RapidAPI-Key: 8d911776acmshef38150aa1b1abdp121c36jsn24400eaad090"
+        })*/
+        @GET("/grammar")
+        Call<ResponseGrammar> call(
+                //Passing the queries
+                @Query("text") String text,
+                @Query("language") String language,
+                @Query("key") String key
+        );
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -230,6 +331,48 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
     private void checkPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+        }
+    }
+
+    public void layoutToImage(View view) {
+        // get view group using reference
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        // convert view group to bitmap
+        relativeLayout.setDrawingCacheEnabled(true);
+        relativeLayout.buildDrawingCache();
+        Bitmap bm = relativeLayout.getDrawingCache();
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+        File f = new File(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void imageToPDF() throws FileNotFoundException {
+        try {
+            Document document = new Document();
+            dirpath = android.os.Environment.getExternalStorageDirectory().toString();
+            PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/parse.pdf")); //  Change pdf's name.
+            document.open();
+            Image img = Image.getInstance(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+            float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / img.getWidth()) * 100;
+            img.scalePercent(scaler);
+            img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+            document.add(img);
+            document.close();
+            Toast.makeText(getActivity(), "PDF Generated successfully!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.d("Error: ", "imageToPDF: " + e.toString());
         }
     }
 }
