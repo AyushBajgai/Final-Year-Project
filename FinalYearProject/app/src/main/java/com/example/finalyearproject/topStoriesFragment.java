@@ -53,7 +53,7 @@ public class topStoriesFragment extends Fragment {
     };
 
     private void showNews(List<NewsHeadlines> list){
-       RecyclerView recyclerView = (RecyclerView) rootView2.findViewById(R.id.recycler_main);
+       RecyclerView recyclerView = (RecyclerView) rootView2.findViewById(R.id.recycler_report);
        recyclerView.setHasFixedSize(true);
        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 

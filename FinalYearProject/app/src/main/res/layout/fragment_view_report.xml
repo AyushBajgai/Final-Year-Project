@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view_report">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_report"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_below="@id/relativeLayout"
-            android:text="This is Report"
-            tools:ignore="NotSibling" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
 
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
-</FrameLayout>
+</ScrollView>

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 
 import android.os.Environment;
+import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -39,9 +41,14 @@ import android.widget.Toast;
 import com.example.finalyearproject.Models.Description;
 import com.example.finalyearproject.Models.Error;
 import com.example.finalyearproject.Models.NewsApiResponse;
+import com.example.finalyearproject.Models.Report;
 import com.example.finalyearproject.Models.RequestManager;
 import com.example.finalyearproject.Models.ResponseGrammar;
 import com.example.finalyearproject.databinding.FragmentAnalyzeSpeechBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.itextpdf.text.Document;
@@ -87,7 +94,7 @@ public class analyzeSpeechFragment extends Fragment {
     int startIndex, endIndex;
 
     private View rootView;
-    String dirpath;
+    File dirpath;
     private static final String TAG = "VoiceRecognition";
 
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
@@ -95,6 +102,7 @@ public class analyzeSpeechFragment extends Fragment {
    // private static final int REQ_CODE_SPEECH_INPUT = 100;
 
     SpeechRecognizer speechRecognizer;
+    private DatabaseReference mDatabase;
 
     EditText recordedText;
     ImageButton mic;
@@ -102,6 +110,7 @@ public class analyzeSpeechFragment extends Fragment {
     Button check_grammar;
 
     public static final Integer RecordAudioRequestCode = 1;
+    private FirebaseUser user;
 
 private FragmentAnalyzeSpeechBinding dashboardBinding;
 
@@ -109,6 +118,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_analyze_speech, container, false);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
          ((dashboard)getActivity()).changeTitle("Analyze Speech");
 
@@ -119,25 +129,14 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
       //  Log.d("text", "onClick: "+subString+subString2);
 
         //Getting an ID
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
         recordedText = (EditText) rootView.findViewById(R.id.record_text);
         mic = (ImageButton) rootView.findViewById(R.id.recorder);
         check_grammar = (Button) rootView.findViewById(R.id.grammar_check);
         description = (TextView) rootView.findViewById(R.id.grammar_description);
         suggestion = (TextView) rootView.findViewById(R.id.grammar_suggestion);
-        Button savePdf = (Button) rootView.findViewById(R.id.savePdf);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
-
-        savePdf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutToImage(rootView);
-                try {
-                    imageToPDF();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +179,11 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
                                 }
                             }
                         }
+
+                        Report report = new Report(recordText, suggestion.getText().toString(), description.getText().toString());
+
+                        mDatabase.child(user.getUid()).child("Reports").push().setValue(report);
+
                     }
 
                     @Override
@@ -188,18 +192,7 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
                     }
                 });
 
-              /*  Request request = new Request.Builder()
-                        .url("https://grammarbot.p.rapidapi.com/check")
-                        .post(body)
-                        .addHeader("content-type", "application/x-www-form-urlencoded")
-                        .addHeader("X-RapidAPI-Host", "grammarbot.p.rapidapi.com")
-                        .addHeader("X-RapidAPI-Key", "08f0c5d657mshcd07a10b9a6e829p16bdbajsnc8abf85306ce")
-                        .build();
-                try {
-                    Response response = client.newCall(request).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
+
             }
         });
 
@@ -345,8 +338,9 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
         share.setType("image/jpeg");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-
-        File f = new File(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+        dirpath = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM);
+        File f = new File(dirpath, File.separator + "image.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -360,10 +354,9 @@ private FragmentAnalyzeSpeechBinding dashboardBinding;
     public void imageToPDF() throws FileNotFoundException {
         try {
             Document document = new Document();
-            dirpath = android.os.Environment.getExternalStorageDirectory().toString();
             PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/parse.pdf")); //  Change pdf's name.
             document.open();
-            Image img = Image.getInstance(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+            Image img = Image.getInstance(dirpath + File.separator + "image.jpg");
             float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
                     - document.rightMargin() - 0) / img.getWidth()) * 100;
             img.scalePercent(scaler);

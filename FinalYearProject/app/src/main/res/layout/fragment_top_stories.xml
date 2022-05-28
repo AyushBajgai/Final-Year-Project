@@ -12,7 +12,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_margin="8dp"
-            android:id="@+id/recycler_main"
+            android:id="@+id/recycler_report"
             android:layout_width="match_parent"
             android:layout_height="695dp">
 

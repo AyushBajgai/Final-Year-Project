@@ -19,10 +19,10 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         //Getting an id from layout
-        text_title = itemView.findViewById(R.id.text_title);
-        text_source = itemView.findViewById(R.id.text_source);
+        text_title = itemView.findViewById(R.id.input_text);
+        text_source = itemView.findViewById(R.id.input_description);
         img_headline = itemView.findViewById(R.id.img_headline);
-        cardView = itemView.findViewById(R.id.main_container);
+        cardView = itemView.findViewById(R.id.report_container);
 
     }
 }

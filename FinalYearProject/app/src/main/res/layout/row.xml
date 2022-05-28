@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_container"
+    android:id="@+id/report_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             tools:ignore="Suspicious0dp">
             
             <TextView
-                android:id="@+id/text_title"
+                android:id="@+id/input_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -32,7 +32,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/text_source"
+                android:id="@+id/input_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
