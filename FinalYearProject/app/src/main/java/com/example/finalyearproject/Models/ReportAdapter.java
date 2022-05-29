@@ -6,17 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalyearproject.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.CustomViewHolder>{
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Reports").child("input");
     private Context context;
     private List<Report> reports;
 
@@ -47,6 +53,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.CustomView
 
         TextView input_text, description_text, suggestion_text;
         CardView cardView;
+        ImageView btnDelete;
+
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -55,6 +63,22 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.CustomView
             description_text = itemView.findViewById(R.id.input_description);
             suggestion_text = itemView.findViewById(R.id.input_suggestion);
             cardView = itemView.findViewById(R.id.report_container);
+            btnDelete =(ImageView) itemView.findViewById(R.id.delete_speak);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ref.child(reports.get(getAdapterPosition()).getInput()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                         //   FirebaseDatabase.getInstance().getReference().child("Reports").child("input").setValue(null);
+                            reports.remove(getAdapterPosition());
+                            notifyItemRemoved(getAdapterPosition());
+                            Toast.makeText(context.getApplicationContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            });
         }
     }
 

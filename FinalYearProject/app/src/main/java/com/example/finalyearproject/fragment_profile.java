@@ -69,8 +69,6 @@ public class fragment_profile extends Fragment {
                     email_txt.setText(email);
                     address_txt.setText(address);
                     phone_txt.setText(contactNo);
-
-
                 }
             }
 

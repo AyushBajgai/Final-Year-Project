@@ -51,6 +51,9 @@
     <string name="exit">Exit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="speak">Press record button to speak</string>
+    <string name="description">Description</string>
+    <string name="suggestion">Suggestion</string>
 
     <!-- Api Key -->
     <string name="api_key">aac4fb9367c34dbf97bf94cbb16963b9</string>
