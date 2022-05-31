@@ -1,0 +1,70 @@
+{
+  "Users": {
+    "06PXmmeAamNYDI3rfAOFey8bB592": {
+      "address": "Banepa",
+      "contactNo": "9841414141",
+      "email": "azmit@gmail.com",
+      "firstName": "Azmit",
+      "lastName": "Homagain",
+      "password": "99f2bdf9942653ab32d9dfa0b43c72c3fbbb9679450fd965c590c224897b848a"
+    },
+    "DZTvYoDG9jdqCEhbp3bYDVSJWCV2": {
+      "address": "Balaju",
+      "contactNo": "9840404040",
+      "email": "qpashmina@gmail.com",
+      "firstName": "Hello",
+      "lastName": "Test",
+      "password": "99f2bdf9942653ab32d9dfa0b43c72c3fbbb9679450fd965c590c224897b848a"
+    },
+    "VdrB0GAJsSVrZ5MrCwAweqwBPY23": {
+      "Reports": {
+        "-N3EVMjDyXBxNVhuHMn9": {
+          "description": "Possible spelling mistake found.",
+          "input": "I want a tesr",
+          "suggestion": "Possible Suggestions:\ntest\ntear\nESR\nTESL\nCESR\nTER\nTES"
+        },
+        "-N3EVaCRXxF616yZhnNw": {
+          "description": "The word ‘wanna’ is informal.",
+          "input": "I wanna say hello",
+          "suggestion": "Possible Suggestions:\nwant to"
+        },
+        "-N3KE1Vm1BA5ZXo93bWp": {
+          "description": "Possible spelling mistake found.",
+          "input": "This is a wong spellingz. ",
+          "suggestion": "Possible Suggestions:\nWong\nLyng\nNG\nMons\nMono\nMonk\nMeng"
+        },
+        "-N3KEQ5WguvgseoTNgfQ": {
+          "description": "The verb ‘is’ is singular. Did you mean: “This is” or “These are”?",
+          "input": "These is wrong input ",
+          "suggestion": "Possible Suggestions:\nThis is\nThese are"
+        }
+      },
+      "address": "Mheipi Balaju",
+      "contactNo": "9840204142",
+      "email": "ayushbajgai@gmail.com",
+      "firstName": "Ayush",
+      "lastName": "Bajgai",
+      "password": "99f2bdf9942653ab32d9dfa0b43c72c3fbbb9679450fd965c590c224897b848a"
+    },
+    "XgYMW8VTeXQhnaCnE8Bxm35lsgh2": {
+      "Reports": {
+        "-N39TZPBeU8oAv9XFTXP": {
+          "description": "Possible spelling mistake found.",
+          "input": "I am niraj ",
+          "suggestion": "Possible Suggestions:\nIraq\nPiran\nNIA\nNICAP\nNMRA\nNVRAM\nNika"
+        },
+        "-N39egsV_BZ6c_WxpbCC": {
+          "description": "Possible spelling mistake found.",
+          "input": "Hello mothafaka",
+          "suggestion": "Possible Suggestions:\nMathafarn\nMishawaka"
+        }
+      },
+      "address": "Bhaktapur",
+      "contactNo": "9818234567",
+      "email": "Exampletest@xyz.com",
+      "firstName": "Test",
+      "lastName": "Example",
+      "password": "99f2bdf9942653ab32d9dfa0b43c72c3fbbb9679450fd965c590c224897b848a"
+    }
+  }
+}
