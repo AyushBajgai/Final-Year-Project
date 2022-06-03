@@ -1,0 +1,62 @@
+<resources>
+    <!-- For Login-->
+    <string name="app_name">Speech to Action</string>
+    <string name="login">LOGIN</string>
+    <string name="lbl_username">Username</string>
+    <string name="login_email_hint">Enter your email address</string>
+    <string name="login_password_hint">Enter your password</string>
+    <string name="signup_login">Already have an account?</string>
+    <string name="signin">Sign In</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="login_signup_hint">Don\'t have an account?</string>
+    <string name="signup">Sign Up</string>
+    <string name="login_name_hint">Name</string>
+    <string name="login_mobile_number_hint">Mobile Number</string>
+
+    <!-- For Register-->
+    <string name="register">REGISTER</string>
+    <string name="lbl_fname">First Name</string>
+    <string name="lbl_lname">Last Name</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_cpassword">Confirm Password</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_address">Address</string>
+    <string name="lbl_contactNo">Contact Number</string>
+    <string name="register_btn">Register</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard">Dashboard</string>
+    <string name="speech">Analyze\nSpeech</string>
+    <string name="profile">View\nProfile</string>
+    <string name="v_reports">View\nReports</string>
+    <string name="stories">Top\nStories</string>
+    <string name="tips">Useful\nTips</string>
+
+    <!-- Profile -->
+    <string name="lbl_full_name">Name</string>
+    <string name="db_full_name">Your name goes here</string>
+    <string name="db_email">Your email goes here</string>
+    <string name="db_address">Your address goes here</string>
+    <string name="db_contact_no">Your contact goes here</string>
+    <string name="change_password">Change Password</string>
+
+
+    <!-- Reset Password -->
+    <string name="reset">Reset Password</string>
+    <string name="valid">Enter your email address</string>
+
+
+    <!-- Button Navigation -->
+    <string name="home">Home</string>
+    <string name="exit">Exit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="speak">Press record button to speak</string>
+    <string name="description">Description</string>
+    <string name="suggestion">Suggestion</string>
+
+    <!-- Api Key -->
+    <string name="api_key">aac4fb9367c34dbf97bf94cbb16963b9</string>
+
+
+</resources>

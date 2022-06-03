@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216504741042",
+    "project_id": "improve-speech",
+    "storage_bucket": "improve-speech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216504741042:android:c070f61ddef9ad0ad82dab",
+        "android_client_info": {
+          "package_name": "com.example.finalyearproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216504741042-fdf0lm3dogunrh3qc30k7lff8thadvl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKtOnZxJjIp1mo-hAUa-_gX_RJTbIVCwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216504741042-fdf0lm3dogunrh3qc30k7lff8thadvl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tips_title">Tips for Public speaking</string>
+
+    <string name="tip1"><b>1. Know your audience</b>\n\nThere is typically a cause for speaking in front of an audience.Know who you are speaking to and what they want or need from the interaction. If it\'s your friends and family, entertain then. If it\'s a corporate event, teach and inspire them. It is critical to understand the demographics of the target audience.</string>
+
+    <string name="tip2"><b>2. Practise more</b>\n\nNothing develops muscle memory until you consistently practice it. Make time to practice every day if you have a public speech coming up. Prepare your objectives and material in advance. This may be done while driving or while exercising and anywhere.</string>
+
+    <string name="tip3"><b>3. Practise with distractions</b>\n\nWhen you have a good understanding of the subject, you may go on to the next step. To see how well you\'ve prepared, try adding some distractions. Like pushing your child in the swing, turning on the TV, playing background music. Anything that increases the level of difficulty.</string>
+
+    <string name="tip4"><b>4. Know the environment</b>\n\nBe aware of the location where you will be speaking. Arrive significantly earlier than scheduled. Walk around the room and around the stage. Get a sense of the atmosphere so that you can feel at ease when it\'s "rush hour."</string>
+
+    <string name="tip5"><b>5. Practise in front of a mirror</b>\n\nPracticing in front of a mirror is an effective technique to learn the right amount of body movements, hand movement, and facial expressions. This will make delivering your content to numerous people much easier.</string>
+
+    <string name="tip6"><b>6. Take every opportunity to express yourself</b>\n\nThe only way to improve at anything is to practice it frequently. It\'s all well and good to practice, but nothing surpasses actually performing in front of an audience.</string>
+
+    <string name="tip7"><b>7. Make an eye contact</b>\n\nThis is, without a doubt, one of the most significant and beneficial techniques. It makes no difference how large the crowd is. Make as much eye contact as you can with as many people. It gives the impression that you are communicating directly to the audience. Also, don\'t limit yourself to the first few rows of people. Take a look at the people in the rear as well.</string>
+
+    <string name="tip8"><b>8. Practise with body language and movement</b>\n\nRemember that tone of voice and body language are far more important than words while communicating. Of course, words are important, but movement and body language add emphasis.</string>
+</resources>
